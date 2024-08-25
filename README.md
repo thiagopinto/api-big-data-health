@@ -44,6 +44,20 @@ Para acessar a documentação Swagger, após iniciar o projeto, acesse:
 
 ## Como Rodar o Projeto
 
+### .env
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USERNAME=<health>
+DATABASE_PASSWORD=<secret>
+DATABASE_NAME=<health>
+DATABASE_SYNCHRONIZE=true
+
+JWT_SECRET=<secret>
+
+CLOUDINARY_CLOUD_NAME=<xxx> 
+CLOUDINARY_API_KEY=<123> 
+CLOUDINARY_API_SECRET=<xxx-xxx>
+
 ### 1. Clone o Repositório
 
 ```bash
@@ -52,22 +66,17 @@ cd api-big-data-health
 
 npm install
 
-.env
-### Database config ###
-DATABASE_HOST=localhost
-DATABASE_PORT=5432
-DATABASE_USERNAME=<health>
-DATABASE_PASSWORD=<secret>
-DATABASE_NAME=<health>
-DATABASE_SYNCHRONIZE=true
-
-### JWT SECRET ###
-JWT_SECRET=<secret>
-
-### CLOUDINARY ###
-CLOUDINARY_CLOUD_NAME=<xxx> 
-CLOUDINARY_API_KEY=<123> 
-CLOUDINARY_API_SECRET=<xxx-xxx>
-
 npm run migration:run
 npm run start:dev
+
+## Como Rodar o Projeto com Docker
+
+### 1. Clonar o Repositório
+
+```bash
+git clone git@github.com:thiagopinto/api-big-data-health.git
+cd api-big-data-health
+
+mkdir data
+
+docker-compose up -d

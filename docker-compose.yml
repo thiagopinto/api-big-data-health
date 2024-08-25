@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    image: node:18-alpine
+    container_name: api-big-data-health
+    working_dir: /data
+    volumes:
+      - .:/data
+      - /data/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    command: >
+      sh -c "npm install && npm run start:dev"
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-big-data-health
+    environment:
+      POSTGRES_USER: seu_usuario
+      POSTGRES_PASSWORD: sua_senha
+      POSTGRES_DB: nome_do_banco
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
