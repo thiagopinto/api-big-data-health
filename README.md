@@ -1,85 +1,73 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# API Big Data Health
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+![API Big Data Health](https://res.cloudinary.com/dr4vsuqsk/image/upload/v1724611502/xl5vcaj3bgfhvs8gy54s.png)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Descrição
 
-## Description
+Este projeto é uma API desenvolvida em NestJS, que implementa um sistema de autenticação de usuários, upload de imagens, listagem de imagens, e deleção de imagens utilizando o Cloudinary para armazenamento. O banco de dados utilizado é o PostgreSQL e a autenticação é feita via JWT (JSON Web Token).
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Funcionalidades
 
-## Project setup
+### 1. Autenticação de Usuário
+- Implementação de sistema de autenticação utilizando JWT.
+- Registro e login de usuários.
+- Cada usuário possui suas próprias credenciais (email e senha).
+
+### 2. Upload de Imagem
+- Usuários autenticados podem fazer upload de imagens para o Cloudinary.
+- As informações sobre a imagem (URL, ID do Cloudinary, etc.) são salvas no banco de dados Postgres e associadas ao usuário que fez o upload.
+
+### 3. Listagem de Imagens
+- Usuários autenticados podem listar todas as imagens que eles próprios carregaram, recuperando as informações do banco de dados.
+
+### 4. Deleção de Imagem
+- Usuários autenticados podem deletar suas próprias imagens.
+- A deleção é refletida tanto no Cloudinary quanto no banco de dados.
+
+### 5. Sincronização
+- A aplicação garante que os dados entre o banco de dados Postgres e o Cloudinary estejam sempre sincronizados.
+- Em caso de falhas em operações, a API lida com isso para evitar inconsistências nos dados.
+
+## Tecnologias Utilizadas
+
+- **NestJS**: Framework utilizado para construção da API. [Documentação](https://docs.nestjs.com/)
+- **Postgres**: Banco de dados utilizado. [Documentação](https://www.postgresql.org/)
+- **Cloudinary**: Serviço de armazenamento e gerenciamento de imagens. [Documentação](https://cloudinary.com/)
+- **JWT (JSON Web Token)**: Utilizado para autenticação dos usuários.
+- **Swagger**: Ferramenta utilizada para documentação da API.
+
+## Documentação da API
+
+A documentação da API é feita com Swagger, que permite a visualização e teste das rotas de forma interativa.
+
+Para acessar a documentação Swagger, após iniciar o projeto, acesse:
+
+## Como Rodar o Projeto
+
+### 1. Clone o Repositório
 
 ```bash
-$ npm install
-```
+git clone git@github.com:thiagopinto/api-big-data-health.git
+cd api-big-data-health
 
-## Compile and run the project
+npm install
 
-```bash
-# development
-$ npm run start
+.env
+### Database config ###
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USERNAME=<health>
+DATABASE_PASSWORD=<secret>
+DATABASE_NAME=<health>
+DATABASE_SYNCHRONIZE=true
 
-# watch mode
-$ npm run start:dev
+### JWT SECRET ###
+JWT_SECRET=<secret>
 
-# production mode
-$ npm run start:prod
-```
+### CLOUDINARY ###
+CLOUDINARY_CLOUD_NAME=<xxx> 
+CLOUDINARY_API_KEY=<123> 
+CLOUDINARY_API_SECRET=<xxx-xxx>
 
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+npm run migration:run
+npm run start:dev
